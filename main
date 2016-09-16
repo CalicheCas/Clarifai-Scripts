@@ -1,0 +1,24 @@
+package com.apipulse.AFconnector.sdk
+import com.apipulse.afconnector.AFConnectorWrapper;
+import groovy.lang.GroovyShell;
+
+class SdkMain {
+	static main(args) {
+
+    File f = new File("scripts/clarifai.groovy") // Change script file and paramters as needed.
+		AFConnectorWrapper wrapper = new GroovyShell().getClassLoader().parseClass(f.getText()).newInstance()
+		wrapper.setMessage(new MockEvent())
+		MockParams params = new MockParams()
+		//Params for Port Call to get new access token
+		params['accessToken']  = 's7xvvuUQV1u3it6KTmHtOjeylh1iGd'
+		params['happy'] = "https://s10.postimg.org/72tpwkkmx/H17.jpg"
+		params['sad'] = "https://s10.postimg.org/4c05bdlk9/S16.jpg"
+		params['worried'] = "https://s10.postimg.org/dz29b0amx/W16.jpg"
+		params['angry'] = "https://s10.postimg.org/sdqcxozmh/A17.jpg"
+		params['funny'] = "https://s10.postimg.org/c3ppslzw9/F17.jpg"
+		params['robot'] = "http://www.robotshop.com/blog/en/files/myon-humanoid-robot.jpg"
+		//params['id'] = 'eyes' // emotional state, happy, sad, angry, worries, bots
+		//params['filePath'] = '/User/carlo/Desktop/happyFace.jpeg'
+		wrapper.setParams(params)
+		wrapper.run()
+		}
